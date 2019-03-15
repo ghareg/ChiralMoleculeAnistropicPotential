@@ -6,6 +6,7 @@
 #include <thread>
 void calcFullPol(double* Pol, const double* fact, const PauliMatrix& pal);
 void calcPol(double* Pol, const double* fact, const PauliMatrix& pal, int rs, int re);
+void generateHermite(int nmax, double arg, double* HMat);
 
 int main()
 {
@@ -141,11 +142,15 @@ void calcPol(double* Pol, const double* fact, const PauliMatrix& pal, int rs, in
 					f2 << 0.0, 0.0, 0.0, 0.0;
 					f3 << 0.0, 0.0, 0.0, 0.0;
 					f4 << 0.0, 0.0, 0.0, 0.0;
-					gsl_sf_hermite_phys_array(nmax + 4, pm.kSinal * pm.cosBeta / pm.alphax, HermiteMatx1);
-					gsl_sf_hermite_phys_array(nmax + 4, pm.kSinal * pm.sinBeta / pm.alphay, HermiteMaty1);
-
-					gsl_sf_hermite_phys_array(nmax + 4, -pm.kSinth * pm.cosTau / pm.alphax, HermiteMatx2);
-					gsl_sf_hermite_phys_array(nmax + 4, -pm.kSinth * pm.sinTau / pm.alphay, HermiteMaty2);
+					generateHermite(nmax + 4, pm.kSinal * pm.cosBeta / pm.alphax, HermiteMatx1);
+					generateHermite(nmax + 4, pm.kSinal * pm.sinBeta / pm.alphay, HermiteMaty1);
+				//	gsl_sf_hermite_phys_array(nmax + 4, pm.kSinal * pm.cosBeta / pm.alphax, HermiteMatx1);
+				//	gsl_sf_hermite_phys_array(nmax + 4, pm.kSinal * pm.sinBeta / pm.alphay, HermiteMaty1);
+					
+					generateHermite(nmax + 4, -pm.kSinth * pm.cosTau / pm.alphax, HermiteMatx2);
+					generateHermite(nmax + 4, -pm.kSinth * pm.sinTau / pm.alphay, HermiteMaty2);
+				//	gsl_sf_hermite_phys_array(nmax + 4, -pm.kSinth * pm.cosTau / pm.alphax, HermiteMatx2);
+				//	gsl_sf_hermite_phys_array(nmax + 4, -pm.kSinth * pm.sinTau / pm.alphay, HermiteMaty2);
 					for (int nc1 = 0; nc1 <= nmax; ++nc1) {
 						for (int nc2 = 0; nc2 <= nmax; ++nc2) {	
 							alphaxSq = pm.alphax * pm.alphax;
@@ -235,5 +240,18 @@ void calcPol(double* Pol, const double* fact, const PauliMatrix& pal, int rs, in
 			theta += Pi / ND;
 		}
 		E += EnMult * EMax / ND;
+	}
+}
+
+void generateHermite(int nmax, double arg, double* HMat)
+{
+	if (nmax > 0) {
+		HMat[0] = 1.0;
+	}
+	if (nmax > 1) {
+		HMat[1] = 2.0 * arg;
+	}
+	for (int i = 2; i < nmax; ++i) {
+		HMat[i] = 2.0 * arg * HMat[i - 1] - 2.0 * (i - 1) * HMat[i - 2];
 	}
 }
