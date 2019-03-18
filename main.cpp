@@ -226,9 +226,9 @@ void calcPol(double* Pol, const double* fact, const PauliMatrix& pal, int rs, in
 					}
 					f0 = (-1.0  / (4 * Pi)) * f0;
 					f1 = (-1.0 / (4 * Pi)) * f1;
-					f2 = (alphaSOC / (4 * Pi)) * I * (pal.pal1 * f2);
-					f3 = (-alphaSOC / (4 * Pi)) * I * pal.pal2 * f3;
-					f4 = (alphaSOC / (4 * Pi)) * I * pal.pal3 * f4;
+					f2 = (alphaSOC1 / (4 * Pi)) * I * (pal.pal1 * f2);
+					f3 = (-alphaSOC2 / (4 * Pi)) * I * pal.pal2 * f3;
+					f4 = (alphaSOC3 / (4 * Pi)) * I * pal.pal3 * f4;
 					ft = f0 + f1 + f2 + f3 + f4;
 					ft = ft * rho * ft.adjoint();
 					Polc += ((pal.pal3 * ft).trace() / ft.trace()).real();
