@@ -52,5 +52,5 @@ Complex I13(int n, const double* HermiteMat, double alpha)
 
 Complex I20(int n, double x, double alpha)
 {
-	return std::pow(x / alpha, n) / sqrt(2);
+	return std::pow(x / alpha, n) * std::exp(x * x / (4.0 * alpha * alpha)) / sqrt(2);
 }
