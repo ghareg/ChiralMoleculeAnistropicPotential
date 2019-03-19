@@ -30,6 +30,8 @@ const double alphaSOC3 = 1.2 * alphaSOC;
 const double alphaxC = 1.0;
 const double alphayC = 1.0 / 0.5;
 
+const double kappa = 0.2;
+
 const int ND = 100;
 const double EMax = 1000;
 

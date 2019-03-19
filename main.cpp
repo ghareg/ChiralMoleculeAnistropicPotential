@@ -206,7 +206,8 @@ void calcPol(double* Pol, const double* fact, const PauliMatrix& pal, int rs, in
 							
 							f0 += Iz2(pm.kCosal, pm.kCosth, 0, Lz) * I10xt * I10yt * LVal.L1 +
 								Iz1(pm.kCosal, pm.kCosth, 0, Lz) * I10xt * I10yt * LVal.L2;
-							f1 += F1 * I10xt * I10yt * PGVal.PG2 + (F2 * I11xt * I10yt + F3 * I10xt * I11yt) * PGVal.PG1;
+							f1 += F1 * I10xt * I10yt * PGVal.PG2 + (I * kappa * (alphaxSq * alphaxSq * I12xt * I10yt +
+									alphaySq * alphaySq * I10xt * I12yt) + F2 * I11xt * I10yt + F3 * I10xt * I11yt) * PGVal.PG1;
 							f2 += (2.0 * alphaySq * alphaySq * I11yt + F3 * I10yt) * I10xt * PGVal.PG3 + 
 								(alphaxSq * alphaxSq * I12xt * (-alphaySq * I11yt + tmulty * I10m1yt) + 
 								 alphaySq * alphaySq * I10xt * (-alphaySq * I13yt + tmulty * I12m1yt) + 

@@ -22,11 +22,15 @@ void updateLVal(LValStruct& LVal, int n1, int n2, const Param& pm, const PauliMa
 	Complex I10y = multy * I10(n2, HermiteMaty, pm.alphay);
 	Complex I11x = multx * I11(n1, HermiteMatx, pm.alphax);
 	Complex I11y = multy * I11(n2, HermiteMaty, pm.alphay);
+
+	Complex I12x = multx * I12(n1, HermiteMatx, pm.alphax);
+	Complex I12y = multy * I12(n2, HermiteMaty, pm.alphay);
+
 	double alphax4 = std::pow(pm.alphax, 4);
 	double alphay4 = std::pow(pm.alphay, 4);
 
 	LVal.L1 = F1 * I10x * I10y * pal.pal0;
-	LVal.L2 = (F2 * I11x * I10y + F3 * I10x * I11y) * pal.pal0 + alphaSOC1 * I10x * (2.0 * alphay4 * pm.kCosal * I11y + (F3 * pm.kCosal - F1 * pm.kSinal * pm.sinBeta) * I10y)  * pal.pal1 -
+	LVal.L2 = I * kappa * (alphax4 * I12x * I10y + alphay4 * I10x * I12y) * pal.pol0 + (F2 * I11x * I10y + F3 * I10x * I11y) * pal.pal0 + alphaSOC1 * I10x * (2.0 * alphay4 * pm.kCosal * I11y + (F3 * pm.kCosal - F1 * pm.kSinal * pm.sinBeta) * I10y)  * pal.pal1 -
 		alphaSOC2 * I10y * (2.0 * alphax4 * pm.kCosal * I11x + (F2 * pm.kCosal - F1 * pm.kSinal * pm.cosBeta) * I10x) * pal.pal2 + 
 		alphaSOC3 * (2.0 * pm.kSinal * (alphax4 * pm.sinBeta * I11x * I10y - alphay4 * pm.cosBeta * I10x * I11y) + (F2 * pm.kSinal * pm.sinBeta - F3 * pm.kSinal * pm.cosBeta) * I10x * I10y) * pal.pal3;
 }
