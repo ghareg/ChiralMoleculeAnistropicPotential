@@ -35,7 +35,7 @@ const double kappa = 0.2;
 const int ND = 100;
 const double EMax = 1000;
 
-const int nCore = 4;
+const int nCore = 10;
 const double thresh = 1E-6;
 
 

@@ -2,7 +2,7 @@
 #include "rIntegral.h"
 #include <iostream>
 #include <iomanip>
-#include <gsl/gsl_sf_hermite.h>
+//#include <gsl/gsl_sf_hermite.h>
 #include <thread>
 void calcFullPol(double* Pol, const double* fact, const PauliMatrix& pal);
 void calcPol(double* Pol, const double* fact, const PauliMatrix& pal, int rs, int re);
@@ -104,6 +104,9 @@ void calcPol(double* Pol, const double* fact, const PauliMatrix& pal, int rs, in
 	Complex I12yt;
 	Complex I13yt;
 
+	Complex I20xt;
+	Complex I20yt;
+
 	Complex I10m1xt;
 	Complex I11m1xt;
 	Complex I12m1xt;
@@ -175,6 +178,9 @@ void calcPol(double* Pol, const double* fact, const PauliMatrix& pal, int rs, in
 							I12yt = multy * I12(nc2, HermiteMaty2, pm.alphay);
 							I13yt = multy * I13(nc2, HermiteMaty2, pm.alphay);
 
+							I20xt = multx * I20(nc1, -pm.kSinth * pm.cosTau, pm.alphax);
+							I20yt = multy * I20(nc2, -pm.kSinth * pm.sinTau, pm.alphay);
+
 							if (nc1 > 0) {
 								multx = (pi14 * std::pow(I , nc1 - 1) / std::sqrt(pm.alphax * std::pow(2, nc1 - 2) * fact[nc1 - 1])) *
 									std::exp(-0.5 * pm.kSinth * pm.kSinth * pm.cosTau * pm.cosTau / (alphaxSq));
@@ -206,8 +212,8 @@ void calcPol(double* Pol, const double* fact, const PauliMatrix& pal, int rs, in
 							
 							f0 += Iz2(pm.kCosal, pm.kCosth, 0, Lz) * I10xt * I10yt * LVal.L1 +
 								Iz1(pm.kCosal, pm.kCosth, 0, Lz) * I10xt * I10yt * LVal.L2;
-							f1 += F1 * I10xt * I10yt * PGVal.PG2 + (I * kappa * (alphaxSq * alphaxSq * I12xt * I10yt +
-									alphaySq * alphaySq * I10xt * I12yt) + F2 * I11xt * I10yt + F3 * I10xt * I11yt) * PGVal.PG1;
+							f1 += F1 * I10xt * I10yt * PGVal.PG2 + (I * kappa * I20xt * I20yt 
+									+ F2 * I11xt * I10yt + F3 * I10xt * I11yt) * PGVal.PG1;
 							f2 += (2.0 * alphaySq * alphaySq * I11yt + F3 * I10yt) * I10xt * PGVal.PG3 + 
 								(alphaxSq * alphaxSq * I12xt * (-alphaySq * I11yt + tmulty * I10m1yt) + 
 								 alphaySq * alphaySq * I10xt * (-alphaySq * I13yt + tmulty * I12m1yt) + 
