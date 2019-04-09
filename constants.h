@@ -23,17 +23,21 @@ const double EnMult = 2 * 9.1 * 1.6 * a * a * 1E-5 / (1.05 * 1.05);
 const double alpha0 = 1.05 * 1.05 * 0.01 / (4 * 9.1 * 9.1 * 9 * a * a); 
 const double alphaSOC = alpha0 * 1E6; //alpha in A^2
 
-const double alphaSOC1 = 0.4 * alphaSOC;
-const double alphaSOC2 = 0.8 * alphaSOC;
-const double alphaSOC3 = 1.2 * alphaSOC;
+const double alphaSOC1 = 1.0 * alphaSOC;
+const double alphaSOC2 = 1.0 * alphaSOC;
+const double alphaSOC3 = 1.0 * alphaSOC;
+
+const double xl0 = 0.1;
+const double yl0 = 0.3;
+const double zl0 = 4.0;
 
 const double alphaxC = 1.0;
-const double alphayC = 1.0 / 0.5;
+const double alphayC = 1.0;
 
-const double kappa = 0.2;
+const double kappa = 0.0;
 
 const int ND = 100;
-const double EMax = 1000;
+const double EMax = 2000;
 
 const int nCore = 10;
 const double thresh = 1E-6;

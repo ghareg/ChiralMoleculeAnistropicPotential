@@ -213,18 +213,20 @@ void calcPol(double* Pol, const double* fact, const PauliMatrix& pal, int rs, in
 							f0 += Iz2(pm.kCosal, pm.kCosth, 0, Lz) * I10xt * I10yt * LVal.L1 +
 								Iz1(pm.kCosal, pm.kCosth, 0, Lz) * I10xt * I10yt * LVal.L2;
 							f1 += F1 * I10xt * I10yt * PGVal.PG2 + (I * kappa * I20xt * I20yt 
-									+ F2 * I11xt * I10yt + F3 * I10xt * I11yt) * PGVal.PG1;
+									+ F2 * I11xt * I10yt + F3 * I10xt * I11yt - (F1 * zl0 + F2 * xl0 + F3 * yl0) * I10xt * I10yt) * PGVal.PG1;
 							f2 += (2.0 * alphaySq * alphaySq * I11yt + F3 * I10yt) * I10xt * PGVal.PG3 + 
 								(alphaxSq * alphaxSq * I12xt * (-alphaySq * I11yt + tmulty * I10m1yt) + 
 								 alphaySq * alphaySq * I10xt * (-alphaySq * I13yt + tmulty * I12m1yt) + 
 								 F2 * I11xt * (-alphaySq * I11yt + tmulty * I10m1yt) +
-								 F3 * I10xt * (-alphaySq * I12yt + tmulty * I11m1yt)) * PGVal.PG4 +
+								 F3 * I10xt * (-alphaySq * I12yt + tmulty * I11m1yt) -
+								 (F1 * zl0 + F2 * xl0 + F3 * yl0) * I10xt * (-alphaySq * I11yt + tmulty * I10m1yt)) * PGVal.PG4 +
 								F1 * I10xt * (-alphaySq * I11yt + tmulty * I10m1yt) * PGVal.PG5;
 							f3 += (2.0 * alphaxSq * alphaxSq * I11xt + F2 * I10xt) * I10yt * PGVal.PG3 + 
 								(alphaxSq * alphaxSq * I10yt * (-alphaxSq * I13xt + tmultx * I12m1xt) + 
 								 alphaySq * alphaySq * I12yt * (-alphaxSq * I11xt + tmultx * I10m1xt) + 
 								 F2 * I10yt * (-alphaxSq * I12xt + tmultx * I11m1xt) +
-								 F3 * I11yt * (-alphaxSq * I11xt + tmultx * I10m1xt)) * PGVal.PG4 +
+								 F3 * I11yt * (-alphaxSq * I11xt + tmultx * I10m1xt) -
+								 (F1 * zl0 + F2 * xl0 + F3 * yl0) * I10yt * (-alphaxSq * I11xt + tmultx * I10m1xt)) * PGVal.PG4 +
 								F1 * I10yt * (-alphaxSq * I11xt + tmultx * I10m1xt) * PGVal.PG5;
 							f4 += ((2.0 * alphaxSq * alphaxSq * I11xt + F2 * I10xt) * (-alphaySq * I11yt + tmulty * I10m1yt) -
 									(2.0 * alphaySq * alphaySq * I11yt + F3 * I10yt) * (-alphaxSq * I11xt + tmultx * I10m1xt)) 
